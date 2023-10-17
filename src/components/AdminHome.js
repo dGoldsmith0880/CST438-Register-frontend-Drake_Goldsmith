@@ -118,7 +118,7 @@ const AdminHome = () => {
     return (
         <div margin="auto">
             <h3>Students List</h3>
-            <h4>{message}</h4>
+            <h4 id="message">{message}</h4>
             <table className="Center">
                 <thead>
                     <tr>
@@ -134,16 +134,16 @@ const AdminHome = () => {
                             <td>{row.status}</td>
                             <td>{row.statusCode}</td>
                             <td>
-                                <EditStudent initialStudent={row} editStudent={editStudent} />
+                                <EditStudent id="editStudent" initialStudent={row} editStudent={editStudent} />
                             </td>
                             <td>
-                                <button type="button" margin="auto" onClick={deleteStudent}>Delete</button>
+                                <button id="deleteStudent" type="button" margin="auto" onClick={deleteStudent}>Delete</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <AddStudent addStudent={addStudent} />
+            <AddStudent id="addStudent" addStudent={addStudent} />
         </div>
     );
 }
