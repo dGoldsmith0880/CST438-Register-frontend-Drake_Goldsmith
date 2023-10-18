@@ -57,16 +57,16 @@ const EditStudent = (props) => {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Edit Student</DialogTitle>
                 <DialogContent style={{ paddingTop: 20 }}>
-                    <TextField fullWidth label="Name" name="name" value={student.name} onChange={handleChange} />
-                    <TextField fullWidth label="Email" name="email" value={student.email} onChange={handleChange} />
-                    <TextField fullWidth label="Status" name="status" value={student.status || ''} onChange={handleChange} />
-                    <TextField fullWidth label="Status Code" name="statusCode" value={student.statusCode} onChange={handleChange} />
+                    <TextField fullWidth id="name" label="Name" name="name" value={student.name} onChange={handleChange} />
+                    <TextField fullWidth id="email" label="Email" name="email" value={student.email} onChange={handleChange} />
+                    <TextField fullWidth id="status" label="Status" name="status" value={student.status || ''} onChange={handleChange} />
+                    <TextField fullWidth id="statusCode" label="Status Code" name="statusCode" value={student.statusCode} onChange={handleChange} />
                 </DialogContent>
                 <DialogActions>
                     <Button color="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button color="primary" onClick={handleEdit}>
+                    <Button id="edit" color="primary" onClick={handleEdit}>
                         Edit
                     </Button>
                 </DialogActions>
