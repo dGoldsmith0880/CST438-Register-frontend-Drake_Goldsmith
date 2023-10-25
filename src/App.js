@@ -7,7 +7,6 @@ import ShowSchedule from './components/ShowSchedule';
 import Login from './components/Login';
 
 function App() {
-  const isAuthenticated = false; // You can implement your authentication logic here
 
   return (
     <BrowserRouter>
