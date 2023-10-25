@@ -67,10 +67,9 @@ const AdminHome = () => {
     };
 
     // Function to edit an existing student
-    const editStudent = (updatedStudent) => {
+    const editStudent = (student_id, updatedStudent) => {
         const token = sessionStorage.getItem('jwt'); // Get the JWT token from sessionStorage
         setMessage('');
-        const student_id = students[0].studentId; // Assuming you're editing the first student
         console.log('start editStudent');
 
         fetch(`${SERVER_URL}/student/${student_id}`, {
@@ -150,7 +149,11 @@ const AdminHome = () => {
                             <td>{row.status}</td>
                             <td>{row.statusCode}</td>
                             <td>
-                                <EditStudent id="editStudent" initialStudent={row} editStudent={editStudent} />
+                                <EditStudent
+                                    id="editStudent"
+                                    initialStudent={row}
+                                    editStudent={(updatedStudent) => editStudent(row.studentId, updatedStudent)} // Pass student_id
+                                />
                             </td>
                             <td>
                                 <button id="deleteStudent" type="button" margin="auto" onClick={deleteStudent}>Delete</button>
