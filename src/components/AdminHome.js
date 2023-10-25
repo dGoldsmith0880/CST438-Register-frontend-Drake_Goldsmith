@@ -13,7 +13,13 @@ const AdminHome = () => {
 
     // Function to fetch the list of students from the server
     const fetchStudents = () => {
-        fetch(`${SERVER_URL}/student`) // Make a GET request to the server using the SERVER_URL
+        const token = sessionStorage.getItem('jwt'); // Get the JWT token from sessionStorage
+
+        fetch(`${SERVER_URL}/student`, {
+            headers: {
+                'Authorization': token, // Add the Authorization header with the JWT token
+            }
+        })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Failed to fetch students (${response.status})`);
@@ -32,11 +38,14 @@ const AdminHome = () => {
 
     // Function to add a new student
     const addStudent = (student) => {
+        const token = sessionStorage.getItem('jwt'); // Get the JWT token from sessionStorage
         setMessage('');
         console.log('start addStudent');
+
         fetch(`${SERVER_URL}/student`, {
             method: 'POST', // HTTP POST request to add a new student
             headers: {
+                'Authorization': token, // Add the Authorization header with the JWT token
                 'Content-Type': 'application/json', // Specify JSON data in the request body
             },
             body: JSON.stringify(student), // Send the student data in the request body as JSON
@@ -59,12 +68,15 @@ const AdminHome = () => {
 
     // Function to edit an existing student
     const editStudent = (updatedStudent) => {
+        const token = sessionStorage.getItem('jwt'); // Get the JWT token from sessionStorage
         setMessage('');
         const student_id = students[0].studentId; // Assuming you're editing the first student
         console.log('start editStudent');
+
         fetch(`${SERVER_URL}/student/${student_id}`, {
             method: 'PUT', // HTTP PUT request to update the student
             headers: {
+                'Authorization': token, // Add the Authorization header with the JWT token
                 'Content-Type': 'application/json', // Specify JSON data in the request body
             },
             body: JSON.stringify(updatedStudent), // Send the updated student data as JSON
@@ -87,14 +99,18 @@ const AdminHome = () => {
 
     // Function to delete a student
     const deleteStudent = (event) => {
+        const token = sessionStorage.getItem('jwt'); // Get the JWT token from sessionStorage
         setMessage('');
         const row_id = event.target.parentNode.parentNode.rowIndex - 1;
         console.log("drop course " + row_id);
         const student_id = students[row_id].studentId;
+
         if (window.confirm('Are you sure you want to delete the student?')) {
-            //console.log("Constructed URL: ", `${SERVER_URL}/student/${student_id}?force=true`);
             fetch(`${SERVER_URL}/student/${student_id}?force=true`, {
                 method: 'DELETE', // HTTP DELETE request to delete the student
+                headers: {
+                    'Authorization': token, // Add the Authorization header with the JWT token
+                },
             })
                 .then((res) => {
                     if (res.ok) {
